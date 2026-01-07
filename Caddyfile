@@ -1,0 +1,36 @@
+{
+	local_certs
+	frankenphp {
+		php_ini {
+			memory_limit 256M
+			upload_max_filesize 20M
+			post_max_size 50M
+		}
+	}
+}
+php.localhost {
+	root phpinfo
+	encode
+	php_server
+}
+mailpit.localhost {
+	reverse_proxy localhost:8025
+}
+db.localhost {
+	root dbmin
+	encode
+	php_server
+}
+
+### SITES ###
+
+test.localhost {
+	root sites/test
+	encode
+	mercure {
+		anonymous
+	}
+	php_server {
+		hot_reload
+	}
+}
